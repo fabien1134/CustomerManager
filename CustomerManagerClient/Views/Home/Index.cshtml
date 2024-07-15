@@ -28,20 +28,29 @@
             </table>
         </div>
     </div>
-</div>
 
-<!-- VIEW ADDITIONAL BOOK INFO MODAL -->
-<div id="modal_viewAdditionalBookInfo" class="ui modal">
-    <div class="header">
-        <font>View Additional Book Info</font>
-        <i class="ui close icon modal-cross" style="float: right; cursor: pointer;"></i>
-    </div>
-    <div class="content">
-    </div>
-    <div class="actions footer">
-        <div class="ui deny default button">
-            <i class="ui close icon"></i>&nbsp;
-            <font>Close</font>
+    <div class="row">
+        <div class="col">
+            <h5>Add New Customer</h5>
+            <form id="addCustomerForm">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="surName">Sur Name</label>
+                    <input type="text" class="form-control" id="surName" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" class="form-control" id="age" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Customer</button>
+            </form>
         </div>
     </div>
 </div>
@@ -92,7 +101,6 @@
         });
     }
 
-
     $(document).on("click", "button.view_delete_btn", function () {
         var btnId = $(this).data("id");
         $.ajax({
@@ -107,4 +115,29 @@
             }
         });
     })
+
+
+    $('#addCustomerForm').on('submit', function (e) {
+        e.preventDefault();
+
+        var newCustomer = {
+            FirstName: $('#firstName').val(),
+            SurName: $('#surName').val(),
+            Age: $('#age').val(),
+            Email: $('#email').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: 'https://localhost:7101/CustomerManagement/SaveNewCustomer',
+            contentType: 'application/json',
+            data: JSON.stringify(newCustomer),
+            success: function (response) {
+                LoadCustomerTable();
+            },
+            error: function (error) {
+                alert("Error: " + error.responseText);
+            }
+        });
+    });
 </script>
