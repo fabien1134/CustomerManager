@@ -7,8 +7,7 @@ namespace CustomerManagerAPI.Repoitories
     {
         //Using as a temporary database for now, will use SQL server if there is enough time
         #region Delete when real database used
-        private readonly List<Customer> _savedCustomer =
-        [
+        private readonly List<Customer> _savedCustomer = [
             new Customer
             {
             Id=1,
@@ -28,11 +27,37 @@ namespace CustomerManagerAPI.Repoitories
             Email="mary@hotmail.co.uk",
             Created=DateTime.UtcNow,
             LastUpdated = DateTime.UtcNow
-            }
-        ];
+            }];
 
         private long _autoIncrementedId = 2;
         #endregion
+
+        //public CustomerRepository()
+        //{
+        //    _savedCustomer = new()
+        //    {
+        //    new Customer
+        //    {
+        //    Id=1,
+        //    FirstName ="Josh",
+        //    SurName="Smith",
+        //    Age=34,
+        //    Email="josh@hotmail.co.uk",
+        //    Created=DateTime.UtcNow,
+        //    LastUpdated = DateTime.UtcNow
+        //    },
+        //    new Customer
+        //    {
+        //    Id=2,
+        //    FirstName ="Mary",
+        //    SurName="Nylah",
+        //    Age=34,
+        //    Email="mary@hotmail.co.uk",
+        //    Created=DateTime.UtcNow,
+        //    LastUpdated = DateTime.UtcNow
+        //    }
+        //    };
+        //}
 
         public async Task DeleteCustomer(long id) => _savedCustomer.Remove(_savedCustomer.First(c => c.Id == id));
 
