@@ -22,7 +22,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+//Set as singleton, but will set back to scoped when I add database 
+builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 var app = builder.Build();
